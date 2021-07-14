@@ -61,7 +61,7 @@ namespace JavaToCSharp.Statements
                 throw new InvalidOperationException(message);
             }
 
-            return visitor.Visit(context, statement).WithJavaComments(statement);
+            return visitor.Visit(context, statement).WithJavaComments(statement, string.Empty, context.Options.IncludeJavadocComments);
         }
     }
 }

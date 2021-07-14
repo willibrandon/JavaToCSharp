@@ -68,6 +68,7 @@
                         <CheckBox Margin="5" x:Name="IncludeUsings">Include Usings in Output</CheckBox>
                         <CheckBox Margin="5" x:Name="IncludeNamespace">Include Namespace in Output</CheckBox>
                         <CheckBox Margin="5" x:Name="UseDebugAssertForAsserts">Use Debug.Assert() for asserts</CheckBox>
+                        <CheckBox Margin="5" x:Name="IncludeJavadocComments">Include Javadoc comments</CheckBox>
                     </StackPanel>
                 </Grid>
             </GroupBox>

@@ -41,8 +41,8 @@ namespace JavaToCSharp
         
         public static bool HasFlag<T>(this java.util.EnumSet values, T flag) => values.contains(flag);
 
-        public static TSyntax WithJavaComments<TSyntax>(this TSyntax syntax, JavaAst.Node node, string singleLineCommentEnd = null) 
+        public static TSyntax WithJavaComments<TSyntax>(this TSyntax syntax, JavaAst.Node node, string singleLineCommentEnd = null, bool translateJavadocComments = false)
             where TSyntax : SyntaxNode =>
-            CommentsHelper.AddCommentsTrivias(syntax, node, singleLineCommentEnd);
+            CommentsHelper.AddCommentsTrivias(syntax, node, singleLineCommentEnd, translateJavadocComments);
     }
 }

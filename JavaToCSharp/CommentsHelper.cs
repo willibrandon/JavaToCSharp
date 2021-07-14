@@ -31,7 +31,7 @@ namespace JavaToCSharp
             ["@throws"] = "exception"
         };
 
-        public static TSyntax AddCommentsTrivias<TSyntax>(TSyntax syntax, JavaAst.Node node, string commentEnding) where TSyntax : SyntaxNode
+        public static TSyntax AddCommentsTrivias<TSyntax>(TSyntax syntax, JavaAst.Node node, string commentEnding, bool translateJavadocComments) where TSyntax : SyntaxNode
         {
             var comments = GatherComments(node);
             if (comments.Count > 0)
@@ -41,9 +41,12 @@ namespace JavaToCSharp
                 foreach (var (comment, pos) in comments)
                 {
                     var (kind, pre, post) = GetCommentInfo(comment, commentEnding);
-                    if (kind == SyntaxKind.XmlComment)
+                    if (kind == SyntaxKind.XmlComment) // Javadoc comment
                     {
-                        leadingTriviaList.AddRange(ConvertDocComment(comment, post));
+                        if (translateJavadocComments)
+                        {
+                            leadingTriviaList.AddRange(ConvertDocComment(comment, post));
+                        }
                     }
                     else
                     {

@@ -24,6 +24,7 @@ namespace JavaToCSharpGui.ViewModels
         private bool _includeUsings = true;
         private bool _includeNamespace = true;
         private bool _useDebugAssertForAsserts;
+        private bool _includeJavadocComments;
 
         public ShellViewModel()
         {
@@ -32,6 +33,7 @@ namespace JavaToCSharpGui.ViewModels
             _includeUsings = Properties.Settings.Default.UseUsingsPreference;
             _includeNamespace = Properties.Settings.Default.UseNamespacePreference;
             _useDebugAssertForAsserts = Properties.Settings.Default.UseDebugAssertPreference;
+            _includeJavadocComments = Properties.Settings.Default.IncludeJavadocCommentsPreference;
         }
 
         public ObservableCollection<string> Usings { get; } = new(new JavaConversionOptions().Usings);
@@ -138,6 +140,18 @@ namespace JavaToCSharpGui.ViewModels
             }
         }
 
+        public bool IncludeJavadocComments
+        {
+            get => _includeJavadocComments;
+            set
+            {
+                _includeJavadocComments = value;
+                NotifyOfPropertyChange(() => IncludeJavadocComments);
+                Properties.Settings.Default.IncludeJavadocCommentsPreference = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
         public void AddUsing()
         {
             Usings.Add(_addUsingInput);
@@ -162,6 +176,7 @@ namespace JavaToCSharpGui.ViewModels
             options.IncludeUsings = _includeUsings;
             options.IncludeNamespace = _includeNamespace;
             options.UseDebugAssertForAsserts = _useDebugAssertForAsserts;
+            options.IncludeJavadocComments = _includeJavadocComments;
 
             options.WarningEncountered += Options_WarningEncountered;
             options.StateChanged += Options_StateChanged;

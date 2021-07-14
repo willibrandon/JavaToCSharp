@@ -32,6 +32,8 @@ namespace JavaToCSharp
 
         public bool UseDebugAssertForAsserts { get; set; }
 
+        public bool IncludeJavadocComments { get; set; }
+
         public ConversionState ConversionState { get; set; }
 
         public JavaConversionOptions AddPackageReplacement(string pattern, string replacement, RegexOptions options = RegexOptions.None)
